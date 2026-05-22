@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-cream-50 text-ink-900 transition-colors duration-500;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(253, 186, 116, 0.25) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(254, 215, 170, 0.35) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(248, 236, 216, 0.6) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    @apply bg-ink-950 text-ink-50;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.18) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(234, 88, 12, 0.14) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(124, 45, 18, 0.22) 0px, transparent 50%);
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ember-500/60 ring-offset-2 ring-offset-cream-50;
+  }
+
+  .dark *:focus-visible {
+    @apply ring-offset-ink-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60 shadow-glass;
+  }
+
+  .dark .glass {
+    @apply bg-ink-900/60 border-ink-800/60;
+  }
+
+  .glass-strong {
+    @apply bg-white/85 backdrop-blur-2xl border border-white/70 shadow-glass-lg;
+  }
+
+  .dark .glass-strong {
+    @apply bg-ink-900/80 border-ink-800/70;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 247, 237, 0) 0%,
+      rgba(254, 215, 170, 0.6) 50%,
+      rgba(255, 247, 237, 0) 100%
+    );
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
+  }
+
+  .dark .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(28, 25, 23, 0) 0%,
+      rgba(68, 64, 60, 0.55) 50%,
+      rgba(28, 25, 23, 0) 100%
+    );
+    background-size: 1000px 100%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FDBA74, #F97316);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FB923C, #EA580C);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C2410C, #7C2D12);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+}
+
+/* Lock scroll when modal open */
+body.scroll-locked {
+  overflow: hidden;
+  padding-right: var(--scrollbar-w, 0px);
+}
